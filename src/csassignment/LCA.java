@@ -21,6 +21,26 @@ Node root;
 	   }
 	         
 }
+public boolean isEmpty()
+{
+	return size()==0;
+}
+
+public int size()
+{
+	return size(root);
+	
+}
+
+private int size (Node x)
+{
+	if ( x==null)
+	{
+		return 0; 
+	}
+	else return x.N;
+	
+}
 
 
 public class LCA {
