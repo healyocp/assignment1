@@ -5,47 +5,35 @@ package csassignment;
 import java.util.ArrayList; 
 import java.util.List; 
 
-//A Binary Tree node 
-class Node { 
- int data; 
- Node left, right; 
+// Method to find lowest common ancestor.
+	class Node {
+	  int val;
+	   Node left, right;
+	   Node(int value){
+		   this.val = val;
+	       this.left = this.right = null;
 
- Node(int value) { 
-     data = value; 
-     left = right = null; 
- } 
-} 
+	   }
+	         
+}
 
-public class LCA  
-{ 
 
- Node root; 
- private List<Integer> path1 = new ArrayList<Integer>(); 
- private List<Integer> path2 = new ArrayList<Integer>(); 
+public class LCA {
 
- // Finds the path from root node to given root of the tree. 
- int findLCA(int n1, int n2) { 
-     path1.clear(); 
-     path2.clear(); 
-     return findLCAInternal(root, n1, n2); 
- } 
+    public Node lca(Node root, Node n1, Node n2){
+        if(root == null){
+            return null;
+        }
+        if(root == n1 || root == n2){
+            return root;
+        }
+        
+        Node left = lca(root.left, n1, n2);
+        Node right = lca(root.right, n1, n2);
 
- private int findLCAInternal(Node root, int n1, int n2) { 
-
-     if (!findPath(root, n1, path1) || !findPath(root, n2, path2)) { 
-         System.out.println((path1.size() > 0) ? "n1 is present" : "n1 is missing"); 
-         System.out.println((path2.size() > 0) ? "n2 is present" : "n2 is missing"); 
-         return -1; 
-     } 
-
-     int i; 
-     for (i = 0; i < path1.size() && i < path2.size(); i++) { 
-           
-     // System.out.println(path1.get(i) + " " + path2.get(i)); 
-         if (!path1.get(i).equals(path2.get(i))) 
-             break; 
-     } 
-
-     return path1.get(i-1); 
- } 
-   
+        if(left != null && right != null){
+            return root;
+        }
+        return left != null ? left : right;
+    }
+}
