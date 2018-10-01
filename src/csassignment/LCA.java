@@ -1,18 +1,23 @@
 package csassignment;
-
-//Java Program for Lowest Common Ancestor in a Binary Tree 
-//A O(n) solution to find LCA of two given values n1 and n2 
 import java.util.ArrayList; 
-import java.util.List; 
+
+public class LCA <Key extends Comparable<Key>, Value>{
+
+Node root;
 
 // Method to find lowest common ancestor.
 	class Node {
-	  int val;
-	   Node left, right;
-	   Node(int value){
+		private Key key;
+		private Value val; 
+		private Node left, right;
+		private int N;
+		
+	//constructor
+	   public Node(Key key, Value val, int N){
 		   this.val = val;
-	       this.left = this.right = null;
-
+		   this.key = key;
+		   this.N = N;
+		   
 	   }
 	         
 }
@@ -37,3 +42,5 @@ public class LCA {
         return left != null ? left : right;
     }
 }
+}
+
