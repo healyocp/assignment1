@@ -42,25 +42,67 @@ private int size (Node x)
 	
 }
 
-
-public class LCA {
-
-    public Node lca(Node root, Node n1, Node n2){
-        if(root == null){
-            return null;
-        }
-        if(root == n1 || root == n2){
-            return root;
-        }
-        
-        Node left = lca(root.left, n1, n2);
-        Node right = lca(root.right, n1, n2);
-
-        if(left != null && right != null){
-            return root;
-        }
-        return left != null ? left : right;
-    }
+public boolean contains(Key key){
+	return get (key)!=null;
+	
 }
+
+public Value get ( Key key){
+	
+	return get (root, key);
+	
 }
+private Value get(Node node, Key key)
+{
+	if (node == null) return null;
+	int cmp = key.compareTo(node.key);
+	if(cmp<0) 
+	{
+		return get(node.left, key);
+	}
+	else if ( cmp>0)
+	{
+		return get(node.right,key);
+	}
+	else 
+	{
+		return node.val;
+	}		
+}
+
+public void put(Key key, Value val)
+{
+	if ( val == null) { delete(key);return; }
+	root = put(root, key,val);
+		}
+}
+
+private Node put (Node node, Key key, Value val){
+	if (node == null)
+	{
+		return new Node (key, val,1 );
+	}
+	int cmp = key.compareTo(node.key);
+	if      (cmp < 0) node.left  = put(node.left,  key, val);
+	else if (cmp > 0) node.right = put(node.right, key, val);
+	else              node.val   = val; //updating value
+	node.N = 1 + size(node.left) + size(node.right); // value child1 + value child2 + 1
+	return node;
+}
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
 
